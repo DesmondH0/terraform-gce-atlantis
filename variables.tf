@@ -82,6 +82,18 @@ variable "env_vars" {
   description = "Key-value pairs representing environment variables and their respective values"
 }
 
+variable "gar_authn" {
+  type = object({
+    enabled    = bool
+    registries = optional(string)
+  })
+  description = "VM will automatically authnicate against GAR registry with binded serviceAccount, make sure have `artifactregistry.repositories.downloadArtifacts` permission against your registry, and registries would be your GAR root domain, e.g.\"us-docker.pkg.dev\""
+  default = {
+    enabled    = false
+    registries = "us-docker.pkg.dev"
+  }
+}
+
 variable "service_account" {
   type = object({
     email  = string,
